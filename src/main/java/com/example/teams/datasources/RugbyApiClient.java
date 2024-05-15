@@ -8,14 +8,19 @@ import com.example.teams.models.TeamsCollection;
 @Component
 public class RugbyApiClient {
 
-  private static final String RUGBY_API_URL = "https://v1.rugby.api-sports.io";  
-  private final RestClient client = RestClient.builder().baseUrl(RUGBY_API_URL).build();
+  String API_KEY = System.getProperty("RUGBY_API_KEY");
 
-  public TeamsCollection teamsRequest() {
+  private static final String RUGBY_API_URL = "https://v1.rugby.api-sports.io";
+  private final RestClient client = RestClient.builder()
+      .defaultHeader("x-rapidapi-key", API_KEY)
+      .baseUrl(RUGBY_API_URL).build();
+
+  public TeamsCollection teamsRequest(String year, int leagueID) {
     return client
-    .get()
-    .uri("/teams?league=16&season=2023")
-    .retrieve()
-    .body(TeamsCollection.class);
+        .get()
+        .uri(String.format("/teams?%s&%s", year,
+            leagueID))
+        .retrieve()
+        .body(TeamsCollection.class);
   }
 }

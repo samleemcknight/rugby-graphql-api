@@ -1,4 +1,5 @@
 package com.example.teams.models;
+
 import com.fasterxml.jackson.databind.JsonNode;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -6,14 +7,18 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.List;
 import java.io.IOException;
 
-import com.example.teams.models.MappedTeam;
-
 public class TeamsCollection {
+  List<MappedTeams> teams;
 
   public void setTeams(JsonNode teams) throws IOException {
-    JsonNode teamItems = teams.get("items");
+    JsonNode teamItems = teams.get("response");
     ObjectMapper mapper = new ObjectMapper();
-    
-    mapper.readValue(teamItems.traverse(), new TypeReference<List<MappedTeam>>(){});
+
+    this.teams = mapper.readValue(teamItems.traverse(), new TypeReference<List<MappedTeams>>() {
+    });
+  }
+
+  public List<MappedTeams> getTeams() {
+    return this.teams;
   }
 }
