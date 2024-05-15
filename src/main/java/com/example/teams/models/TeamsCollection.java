@@ -8,17 +8,16 @@ import java.util.List;
 import java.io.IOException;
 
 public class TeamsCollection {
-  List<MappedTeams> teams;
+  List<MappedTeam> teams;
 
   public void setTeams(JsonNode teams) throws IOException {
     JsonNode teamItems = teams.get("response");
     ObjectMapper mapper = new ObjectMapper();
-
-    this.teams = mapper.readValue(teamItems.traverse(), new TypeReference<List<MappedTeams>>() {
+    this.teams = mapper.readValue(teamItems.traverse(), new TypeReference<List<MappedTeam>>() {
     });
   }
 
-  public List<MappedTeams> getTeams() {
+  public List<MappedTeam> getTeams() {
     return this.teams;
   }
 }

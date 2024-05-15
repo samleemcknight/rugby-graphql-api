@@ -2,8 +2,9 @@ package com.example.teams.datafetchers;
 
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsQuery;
+import com.netflix.graphql.dgs.InputArgument;
 import com.example.teams.datasources.RugbyApiClient;
-import com.example.teams.models.MappedTeams;
+import com.example.teams.models.MappedTeam;
 import com.example.teams.models.TeamsCollection;
 import java.util.List;
 
@@ -20,8 +21,9 @@ public class TeamsDataFetcher {
   }
 
   @DgsQuery
-  public List<MappedTeams> getTeams(String year, int leaugeID) {
-    TeamsCollection response = apiClient.teamsRequest(year, leaugeID);
+  public List<MappedTeam> getTeams(@InputArgument String year, @InputArgument Integer leagueID) {
+    TeamsCollection response = apiClient.teamsRequest(year, leagueID);
+
     return response.getTeams();
   }
 }
