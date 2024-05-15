@@ -1,0 +1,54 @@
+type Score {
+  home: Int
+  away: Int
+}
+
+type Periods {
+  first: Score
+  second: Score
+  overtime: Score
+  secondOvertime: Score
+}
+
+type Country {
+  id: ID!
+  name: String!
+  code: String
+  flag: String
+}
+
+type League {
+  id: ID!
+  name: String!
+  logo: String!
+  country: Country
+}
+
+type Game {
+  id: ID!
+  date: String
+  time: String
+  timestamp: Int
+  timezone: String
+  week: String
+  status: String
+  country: Country
+  league: League
+  teams: [Team]
+  score: Score
+  periods: Periods
+}
+
+type Team {
+  id: ID!
+  name: String!
+  logo: String!
+  country: Country 
+  leagues: [League]
+  upcomingGames: [Game]
+  pastGames: [Game]
+}
+
+type Query {
+  getTeams: [Team!]!
+}
