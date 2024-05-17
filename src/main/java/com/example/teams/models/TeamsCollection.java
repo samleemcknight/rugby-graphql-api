@@ -10,10 +10,9 @@ import java.io.IOException;
 public class TeamsCollection {
   List<MappedTeam> teams;
 
-  public void setTeams(JsonNode teams) throws IOException {
-    JsonNode teamItems = teams.get("response");
+  public void setResponse(JsonNode teams) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
-    this.teams = mapper.readValue(teamItems.traverse(), new TypeReference<List<MappedTeam>>() {
+    this.teams = mapper.readValue(teams.traverse(), new TypeReference<List<MappedTeam>>() {
     });
   }
 

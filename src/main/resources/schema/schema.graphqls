@@ -50,5 +50,5 @@ type Team {
 }
 
 type Query {
-  getTeams (year: String!, leagueID: Int!): [Team!]!
+  getTeams (year: String!, leagueID: Int!): [Team]!
 }
