@@ -22,6 +22,8 @@ type League {
   name: String!
   logo: String!
   country: Country
+  type: String
+  teams: [Team]
 }
 
 type Game {
@@ -44,11 +46,11 @@ type Team {
   name: String!
   logo: String!
   country: Country 
-  leagues: [League]
   upcomingGames: [Game]
   pastGames: [Game]
 }
 
 type Query {
-  getTeams: [Team!]!
+  getTeams (year: String!, leagueID: Int!): [Team]!
+  getLeagues (countryID: Int, year: String, leagueID: Int): [League]!
 }

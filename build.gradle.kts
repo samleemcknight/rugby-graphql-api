@@ -22,6 +22,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
 	implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:7.6.0"))
+	implementation("io.github.cdimascio:dotenv-java:3.0.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
@@ -30,6 +31,6 @@ tasks.withType<Test> {
 }
 
 tasks.generateJava {
-	packageName = "com.example.teams.generated"
+	packageName = "com.rugbyapi.teams.generated"
 }
 
