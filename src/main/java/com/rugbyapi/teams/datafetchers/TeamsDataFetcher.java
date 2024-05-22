@@ -9,29 +9,17 @@ import com.rugbyapi.teams.models.TeamsCollection;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 @DgsComponent
-public class TeamsDataFetcher {
+public class TeamsDataFetcher extends DataFecherBase {
 
-  private final RugbyApiClient apiClient;
-
-  @Autowired
   public TeamsDataFetcher(RugbyApiClient rugbyApiClient) {
-    this.apiClient = rugbyApiClient;
+    super(rugbyApiClient);
   }
 
   @DgsQuery
   public List<MappedTeam> getTeams(@InputArgument String year, @InputArgument Integer leagueID) {
-    TeamsCollection response = apiClient.teamsRequest(year, leagueID);
+    TeamsCollection response = this.apiClient.teamsRequest(year, leagueID);
 
     return response.getTeams();
   }
-
-  // @DgsData(parentType = "Team", field = "leagues")
-  // public List<MappedTeam> leagues(DgsDataFetchingEnvironment dfe) {
-  // MappedTeam team = dfe.getSource();
-
-  // return apiClient.countriesRequest(team.getCountry)
-  // }
 }
