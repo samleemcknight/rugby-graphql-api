@@ -6,7 +6,6 @@ import org.springframework.web.client.RestClient;
 import com.rugbyapi.teams.models.LeaguesCollection;
 import com.rugbyapi.teams.models.TeamsCollection;
 
-import graphql.com.google.common.base.Optional;
 import io.github.cdimascio.dotenv.Dotenv;
 
 @Component
@@ -25,8 +24,8 @@ public class RugbyApiClient {
         leagueID)).retrieve().body(TeamsCollection.class);
   }
 
-  public LeaguesCollection leaguesByCountryRequest(Optional<Integer> countryId) {
-    return client.get().uri(String.format("/leagues?country_id=%s", countryId)).retrieve()
+  public LeaguesCollection leaguesByCountryRequest(Integer countryID) {
+    return client.get().uri(String.format("/leagues?country_id=%s", countryID)).retrieve()
         .body(LeaguesCollection.class);
   }
 

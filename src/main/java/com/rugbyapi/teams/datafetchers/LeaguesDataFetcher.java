@@ -9,8 +9,6 @@ import com.rugbyapi.teams.datasources.RugbyApiClient;
 import com.rugbyapi.teams.models.LeaguesCollection;
 import com.rugbyapi.teams.models.MappedLeague;
 
-import graphql.com.google.common.base.Optional;
-
 @DgsComponent
 public class LeaguesDataFetcher extends DataFecherBase {
   public LeaguesDataFetcher(RugbyApiClient rugbyApiClient) {
@@ -18,13 +16,12 @@ public class LeaguesDataFetcher extends DataFecherBase {
   }
 
   @DgsQuery
-  public List<MappedLeague> getLeagues(@InputArgument Optional<Integer> countryID, @InputArgument Optional<String> year,
-      @InputArgument Optional<Integer> leagueID) {
-    // if (countryID != null) {
-    // LeaguesCollection response =
-    // this.apiClient.leaguesByCountryRequest(countryID);
-    // return response.getLeagues();
-    // }
+  public List<MappedLeague> getLeagues(@InputArgument Integer countryID, @InputArgument String year,
+      @InputArgument Integer leagueID) {
+    if (countryID != null) {
+      LeaguesCollection response = this.apiClient.leaguesByCountryRequest(countryID);
+      return response.getLeagues();
+    }
     LeaguesCollection response = this.apiClient.leaguesRequest();
     return response.getLeagues();
   }
