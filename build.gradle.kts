@@ -31,6 +31,6 @@ tasks.withType<Test> {
 }
 
 tasks.generateJava {
-	packageName = "com.example.teams.generated"
+	packageName = "com.rugbyapi.teams.generated"
 }
 

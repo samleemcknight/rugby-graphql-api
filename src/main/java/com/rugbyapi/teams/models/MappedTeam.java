@@ -1,6 +1,6 @@
-package com.example.teams.models;
+package com.rugbyapi.teams.models;
 
-import com.example.teams.generated.types.Team;
+import com.rugbyapi.teams.generated.types.Team;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

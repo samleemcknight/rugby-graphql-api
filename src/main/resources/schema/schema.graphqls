@@ -22,6 +22,7 @@ type League {
   name: String!
   logo: String!
   country: Country
+  teams: [Team]
 }
 
 type Game {
@@ -44,7 +45,6 @@ type Team {
   name: String!
   logo: String!
   country: Country 
-  leagues: [League]
   upcomingGames: [Game]
   pastGames: [Game]
 }

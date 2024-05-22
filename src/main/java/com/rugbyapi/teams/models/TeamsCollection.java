@@ -1,4 +1,4 @@
-package com.example.teams.models;
+package com.rugbyapi.teams.models;
 
 import com.fasterxml.jackson.databind.JsonNode;
 

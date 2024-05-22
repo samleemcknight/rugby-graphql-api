@@ -1,9 +1,10 @@
-package com.example.teams.datasources;
+package com.rugbyapi.teams.datasources;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
-import com.example.teams.models.TeamsCollection;
+import com.rugbyapi.teams.models.LeaguesCollection;
+import com.rugbyapi.teams.models.TeamsCollection;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
@@ -21,5 +22,9 @@ public class RugbyApiClient {
   public TeamsCollection teamsRequest(String year, Integer leagueID) {
     return client.get().uri(String.format("/teams?season=%s&league=%s", year,
         leagueID)).retrieve().body(TeamsCollection.class);
+  }
+
+  public LeaguesCollection countriesRequest(Integer countryId) {
+    return client.get().uri(String.format("/leagues?id=%s", countryId)).retrieve().body(LeaguesCollection.class);
   }
 }

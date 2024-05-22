@@ -1,4 +1,4 @@
-package com.example.teams;
+package com.rugbyapi.teams;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

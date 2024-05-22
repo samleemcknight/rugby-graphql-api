@@ -1,11 +1,12 @@
-package com.example.teams.datafetchers;
+package com.rugbyapi.teams.datafetchers;
 
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
-import com.example.teams.datasources.RugbyApiClient;
-import com.example.teams.models.MappedTeam;
-import com.example.teams.models.TeamsCollection;
+import com.rugbyapi.teams.datasources.RugbyApiClient;
+import com.rugbyapi.teams.models.MappedTeam;
+import com.rugbyapi.teams.models.TeamsCollection;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,4 +27,11 @@ public class TeamsDataFetcher {
 
     return response.getTeams();
   }
+
+  // @DgsData(parentType = "Team", field = "leagues")
+  // public List<MappedTeam> leagues(DgsDataFetchingEnvironment dfe) {
+  // MappedTeam team = dfe.getSource();
+
+  // return apiClient.countriesRequest(team.getCountry)
+  // }
 }
