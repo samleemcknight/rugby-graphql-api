@@ -19,12 +19,12 @@ public class RugbyApiClient {
       .defaultHeader("x-rapidapi-key", API_KEY)
       .baseUrl(RUGBY_API_URL).build();
 
-  public TeamsCollection teamsRequest(String year, Integer leagueID) {
+  public TeamsCollection teamsRequest(String year, String leagueID) {
     return client.get().uri(String.format("/teams?season=%s&league=%s", year,
         leagueID)).retrieve().body(TeamsCollection.class);
   }
 
-  public LeaguesCollection leaguesByCountryRequest(Integer countryID) {
+  public LeaguesCollection leaguesByCountryRequest(String countryID) {
     return client.get().uri(String.format("/leagues?country_id=%s", countryID)).retrieve()
         .body(LeaguesCollection.class);
   }

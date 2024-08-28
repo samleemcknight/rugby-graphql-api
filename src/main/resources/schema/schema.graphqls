@@ -17,6 +17,12 @@ type Country {
   flag: String
 }
 
+type Arena {
+  name: String
+  capacity: Int
+  location: String
+}
+
 type League {
   id: ID!
   name: String!
@@ -45,12 +51,15 @@ type Team {
   id: ID!
   name: String!
   logo: String!
-  country: Country 
+  country: Country
+  national: Boolean
+  founded: Int
+  arena: Arena
   upcomingGames: [Game]
   pastGames: [Game]
 }
 
 type Query {
-  getTeams (year: String!, leagueID: Int!): [Team]!
-  getLeagues (countryID: Int, year: String, leagueID: Int): [League]!
+  getTeams (year: String!, leagueID: String!): [Team]!
+  getLeagues (countryID: String, year: String, leagueID: String): [League]!
 }
