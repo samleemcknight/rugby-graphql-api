@@ -1,6 +1,7 @@
 package com.rugbyapi.teams.datafetchers;
 
 import java.io.IOException;
+import java.time.Year;
 import java.util.List;
 import java.util.Map;
 
@@ -25,19 +26,18 @@ public class LeaguesDataFetcher extends DataFecherBase {
   @DgsQuery
   public DataFetcherResult<List<MappedLeague>> getLeagues(@InputArgument String countryID, @InputArgument String year,
       @InputArgument Integer leagueID) {
-    if (countryID != null) {
+    if (countryID != null && year != null) {
       LeaguesCollection response = this.apiClient.leaguesByCountryRequest(countryID);
       List<MappedLeague> leagues = response.getLeagues();
       return DataFetcherResult.<List<MappedLeague>>newResult()
           .data(leagues)
-          .localContext(Map.of("hasTeamData", false))
+          .localContext(Map.of("year", year))
           .build();
     }
     LeaguesCollection response = this.apiClient.leaguesRequest();
     List<MappedLeague> leagues = response.getLeagues();
     return DataFetcherResult.<List<MappedLeague>>newResult()
         .data(leagues)
-        .localContext(Map.of("hasTeamData", true))
         .build();
   }
 
@@ -45,12 +45,12 @@ public class LeaguesDataFetcher extends DataFecherBase {
   public List<Team> teams(DgsDataFetchingEnvironment dfe) throws IOException {
     MappedLeague league = dfe.getSource();
     String leagueId = league.getId();
-    Map<String, Boolean> localContext = dfe.getLocalContext();
+    Map<String, String> localContext = dfe.getLocalContext();
 
-    if (localContext.get("hasTeamData")) {
-      return league.getTeams();
+    String year = localContext.get("year");
+    if (localContext != null && year != null) {
+      return apiClient.teamsRequest(year, leagueId).getTeams();
     }
-
-    return apiClient.teamsRequest("2024", leagueId).getTeams();
+    return apiClient.teamsRequest(Year.now().toString(), leagueId).getTeams();
   }
 }
